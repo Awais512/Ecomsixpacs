@@ -22,12 +22,32 @@ const createProduct = asyncHandler(async (req, res, next) => {
 
 //Update Product
 const updateProduct = asyncHandler(async (req, res, next) => {
-  res.send('Update Product');
+  let product = await Product.findById(req.params.id);
+  if (!product) {
+    return res
+      .status(404)
+      .json({ success: false, message: 'Product not found' });
+  }
+
+  product = await Product.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+  });
+  res.status(200).json({ success: true, product });
 });
 
 //Delete Product
 const deleteProduct = asyncHandler(async (req, res, next) => {
-  res.send('Delete Product');
+  let product = await Product.findById(req.params.id);
+  if (!product) {
+    return res
+      .status(404)
+      .json({ success: false, message: 'Product not found' });
+  }
+
+  product = await Product.findByIdAndDelete(req.params.id);
+  res
+    .status(200)
+    .json({ success: true, message: 'Product Deleted Successfully' });
 });
 
 module.exports = {
