@@ -4,7 +4,9 @@ const ApiFeatures = require('../utils/apiFeatures');
 
 //Get All Products
 const getProducts = asyncHandler(async (req, res, next) => {
-  const apiFeature = new ApiFeatures(Product.find(), req.query).search();
+  const apiFeature = new ApiFeatures(Product.find(), req.query)
+    .search()
+    .filter();
   const products = await apiFeature.query;
   res.status(200).json({ success: true, products });
 });
