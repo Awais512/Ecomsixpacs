@@ -3,12 +3,14 @@ const Product = require('../models/Product');
 
 //Get All Products
 const getProducts = asyncHandler(async (req, res, next) => {
-  res.send('All Products');
+  const products = await Product.find();
+  res.status(200).json({ success: true, products });
 });
 
 //Get Single Product
 const getProduct = asyncHandler(async (req, res, next) => {
-  res.send('Single Products');
+  const product = await Product.findById(req.params.id);
+  res.status(200).json({ success: true, product });
 });
 
 //Create New Product
