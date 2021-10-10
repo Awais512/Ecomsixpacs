@@ -4,11 +4,28 @@ const ApiFeatures = require('../utils/apiFeatures');
 
 //Get All Products
 const getProducts = asyncHandler(async (req, res, next) => {
-  const apiFeature = new ApiFeatures(Product.find(), req.query)
-    .search()
-    .filter();
-  const products = await apiFeature.query;
-  res.status(200).json({ success: true, products });
+  const resultPerPage = 2;
+  const productCount = await Product.countDocuments();
+  if (req.query.page) {
+    const apiFeatures = new ApiFeatures(Product.find(), req.query)
+      .search()
+      .filter()
+      .pagination(resultPerPage);
+
+    const products = await apiFeatures.query;
+
+    res
+      .status(200)
+      .json({ success: true, count: products.length, productCount, products });
+  } else {
+    const apiFeatures = new ApiFeatures(Product.find(), req.query)
+      .search()
+      .filter();
+    const products = await apiFeatures.query;
+    res
+      .status(200)
+      .json({ success: true, count: products.length, productCount, products });
+  }
 });
 
 //Get Single Product
