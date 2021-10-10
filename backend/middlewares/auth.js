@@ -16,4 +16,17 @@ const protect = asyncHandler(async (req, res, next) => {
   next();
 });
 
-module.exports = { protect };
+const authorizeRoles = (...roles) => {
+  return (req, res, next) => {
+    if (!roles.includes(req.user.role)) {
+      return next(
+        new ErrorResponse(
+          `Role: ${req.user.role} is not allowed to access this resource`
+        )
+      );
+    }
+    next();
+  };
+};
+
+module.exports = { protect, authorizeRoles };
