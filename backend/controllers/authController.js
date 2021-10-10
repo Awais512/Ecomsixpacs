@@ -14,7 +14,9 @@ const register = asyncHandler(async (req, res, next) => {
       url: 'profilePicUrl',
     },
   });
-  res.status(201).json({ success: true, user });
+  const token = user.getJWTToken();
+  user.password = undefined;
+  res.status(201).json({ success: true, token, user });
 });
 
 //Login User
