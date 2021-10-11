@@ -4,10 +4,13 @@ const {
   getProduct,
   updateProduct,
   deleteProduct,
+  createOrUpdateReview,
 } = require('../controllers/productController');
 const { protect, authorizeRoles } = require('../middlewares/auth');
 
 const router = require('express').Router();
+
+router.route('/review').put(protect, createOrUpdateReview);
 
 router
   .route('/')
