@@ -140,6 +140,19 @@ const changePassword = asyncHandler(async (req, res, next) => {
   sendToken(user, 200, res);
 });
 
+const updateProfile = asyncHandler(async (req, res, next) => {
+  const newData = {
+    name: req.body.name,
+    email: req.body.email,
+  };
+  const user = await User.findByIdAndUpdate(req.user.id, newData, {
+    new: true,
+    runValidators: true,
+  });
+
+  res.status(200).json({ success: true, user });
+});
+
 module.exports = {
   register,
   login,
@@ -148,4 +161,5 @@ module.exports = {
   resetPassword,
   getUserDetails,
   changePassword,
+  updateProfile,
 };
