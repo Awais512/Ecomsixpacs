@@ -5,12 +5,18 @@ const {
   updateProduct,
   deleteProduct,
   createOrUpdateReview,
+  getAllProductReviews,
+  deleteProductReviews,
 } = require('../controllers/productController');
 const { protect, authorizeRoles } = require('../middlewares/auth');
 
 const router = require('express').Router();
 
-router.route('/review').put(protect, createOrUpdateReview);
+router
+  .route('/review')
+  .put(protect, createOrUpdateReview)
+  .get(getAllProductReviews)
+  .delete(protect, deleteProductReviews);
 
 router
   .route('/')
