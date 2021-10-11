@@ -6,6 +6,7 @@ const errorHandler = require('./middlewares/error');
 //Importing Route Files
 const productRoutes = require('./routes/productRoutes');
 const authRoutes = require('./routes/authRoutes');
+const userRoutes = require('./routes/userRoutes');
 const cookieParser = require('cookie-parser');
 
 //Midlewares
@@ -16,6 +17,7 @@ app.use(morgan('dev'));
 //Importing Routes
 app.use('/api/v1/products', productRoutes);
 app.use('/api/v1/auth', authRoutes);
+app.use('/api/v1/users', userRoutes);
 
 app.use(errorHandler);
 
