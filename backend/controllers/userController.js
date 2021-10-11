@@ -43,8 +43,27 @@ const updateProfile = asyncHandler(async (req, res, next) => {
   res.status(200).json({ success: true, user });
 });
 
+//Get all Users By Admin
+const getUsersByAdmin = asyncHandler(async (req, res, next) => {
+  const users = await User.find();
+
+  res.status(200).json({ success: true, users });
+});
+
+//Get  User By Admin
+const getUserByAdmin = asyncHandler(async (req, res, next) => {
+  const user = await User.findById(req.params.id);
+
+  if (!user) {
+    return next(new ErrorResponse('User not found', 404));
+  }
+  res.status(200).json({ success: true, user });
+});
+
 module.exports = {
   getUserDetails,
   changePassword,
   updateProfile,
+  getUsersByAdmin,
+  getUserByAdmin,
 };
