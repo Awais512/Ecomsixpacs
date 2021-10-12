@@ -42,4 +42,18 @@ const getOrder = asyncHandler(async (req, res, next) => {
   res.status(200).json({ success: true, order });
 });
 
-module.exports = { newOrder, getOrder };
+//Get my Order
+const myOrders = asyncHandler(async (req, res, next) => {
+  const orders = await Order.find({ user: req.user._id });
+
+  res.status(200).json({ success: true, orders });
+});
+
+//Get my Order
+const getOrders = asyncHandler(async (req, res, next) => {
+  const orders = await Order.find();
+
+  res.status(200).json({ success: true, orders });
+});
+
+module.exports = { newOrder, getOrder, myOrders, getOrders };
