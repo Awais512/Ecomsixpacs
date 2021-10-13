@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import Footer from './components/layout/Footer/Footer';
 import Home from './components/Home/Home';
 import { Route } from 'react-router-dom';
+import ProductDetails from './components/Product/ProductDetails';
 
 function App() {
   useEffect(() => {
@@ -18,6 +19,7 @@ function App() {
       <Header />
 
       <Route exact path='/' component={Home} />
+      <Route exact path='/products/:id' component={ProductDetails} />
 
       <Footer />
     </>
