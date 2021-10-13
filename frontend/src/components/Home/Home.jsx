@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { CgMouse } from 'react-icons/cg';
 import MetaData from '../layout/MetaData';
 import './Home.css';
 import Product from './Product';
+import { getProducts } from '../../actions/productActions';
+import { useDispatch, useSelector } from 'react-redux';
 
 const product = {
   name: 'Blue Shirt',
@@ -15,6 +17,11 @@ const product = {
   _id: '1234435',
 };
 const Home = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getProducts());
+  }, [dispatch]);
   return (
     <>
       <MetaData title={'Homepage'} />
