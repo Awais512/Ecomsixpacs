@@ -1,9 +1,11 @@
 const asyncHandler = require('express-async-handler');
 const Product = require('../models/Product');
 const ApiFeatures = require('../utils/apiFeatures');
+const ErrorResponse = require('../utils/errorResponse');
 
 //Get All Products
 const getProducts = asyncHandler(async (req, res, next) => {
+  // return next(new ErrorResponse('This is test error', 500));
   const resultPerPage = 4;
   const productsCount = await Product.countDocuments();
 
