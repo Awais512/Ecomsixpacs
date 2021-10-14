@@ -5,8 +5,7 @@ const ErrorResponse = require('../utils/errorResponse');
 
 //Get All Products
 const getProducts = asyncHandler(async (req, res, next) => {
-  // return next(new ErrorResponse('This is test error', 500));
-  const resultPerPage = 4;
+  const resultPerPage = 8;
   const productsCount = await Product.countDocuments();
 
   const apiFeatures = new ApiFeatures(Product.find(), req.query)
