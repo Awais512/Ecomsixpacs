@@ -5,7 +5,7 @@ const ErrorResponse = require('../utils/errorResponse');
 
 //Get All Products
 const getProducts = asyncHandler(async (req, res, next) => {
-  const resultPerPage = 8;
+  const resultPerPage = 10;
   const productsCount = await Product.countDocuments();
 
   const apiFeatures = new ApiFeatures(Product.find(), req.query)
@@ -15,9 +15,13 @@ const getProducts = asyncHandler(async (req, res, next) => {
 
   const products = await apiFeatures.query;
 
-  res
-    .status(200)
-    .json({ success: true, count: products.length, productsCount, products });
+  res.status(200).json({
+    success: true,
+    count: products.length,
+    productsCount,
+    resultPerPage,
+    products,
+  });
 });
 
 //Get Single Product
