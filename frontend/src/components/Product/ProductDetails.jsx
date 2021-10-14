@@ -2,13 +2,14 @@ import React, { useEffect } from 'react';
 import './ProductDetails.css';
 import Carousel from 'react-material-ui-carousel';
 import { useDispatch, useSelector } from 'react-redux';
-import { getProductDetails } from '../../actions/productActions';
-// import ReactStars from 'react-rating-stars-component';
+import { clearErrors, getProductDetails } from '../../actions/productActions';
 import { Rating } from '@material-ui/lab';
 import ReviewCard from './ReviewCard';
 import Loader from '../layout/Loader/Loader';
+import { useAlert } from 'react-alert';
 
 const ProductDetails = ({ match }) => {
+  const alert = useAlert();
   const id = match.params.id;
   const dispatch = useDispatch();
   const { product, loading, error } = useSelector(
@@ -16,8 +17,12 @@ const ProductDetails = ({ match }) => {
   );
 
   useEffect(() => {
+    if (error) {
+      alert.error(error);
+      dispatch(clearErrors());
+    }
     dispatch(getProductDetails(id));
-  }, [dispatch, id]);
+  }, [dispatch, id, error, alert]);
 
   const options = {
     size: 'large',

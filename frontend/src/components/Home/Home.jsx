@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { CgMouse } from 'react-icons/cg';
 import MetaData from '../layout/MetaData';
 import './Home.css';
-import Product from './Product';
+import ProductCard from './ProductCard';
 import Loader from '../layout/Loader/Loader';
 import { getProducts } from '../../actions/productActions';
 import { useDispatch, useSelector } from 'react-redux';
@@ -15,7 +15,6 @@ const Home = () => {
     (state) => state.products
   );
 
-  console.log(products);
   useEffect(() => {
     if (error) {
       return alert.error(error);
@@ -42,7 +41,7 @@ const Home = () => {
           <div className='container' id='container'>
             {products &&
               products.map((product) => (
-                <Product key={product._id} product={product} />
+                <ProductCard key={product._id} product={product} />
               ))}
           </div>
         </>
