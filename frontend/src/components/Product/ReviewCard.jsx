@@ -8,7 +8,6 @@ const ReviewCard = ({ review }) => {
     readOnly: true,
     precision: 0.5,
   };
-  console.log(review);
   return (
     <div className='reviewCard'>
       <img src={profilePng} alt='User' />
