@@ -7,7 +7,7 @@ import Loader from '../layout/Loader/Loader';
 import ProductCard from '../Home/ProductCard';
 import './Products.css';
 
-const Products = () => {
+const Products = ({ match }) => {
   const dispatch = useDispatch();
   const alert = useAlert();
 
@@ -15,11 +15,12 @@ const Products = () => {
     (state) => state.products
   );
 
-  useEffect(() => {
-    dispatch(getProducts());
-  }, [dispatch]);
+  const keyword = match.params.keyword;
 
-  console.log(products);
+  useEffect(() => {
+    dispatch(getProducts(keyword));
+  }, [dispatch, keyword]);
+
   return (
     <>
       {loading ? (
