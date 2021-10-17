@@ -4,7 +4,7 @@ import MetaData from '../layout/MetaData';
 import './Home.css';
 import ProductCard from './ProductCard';
 import Loader from '../layout/Loader/Loader';
-import { getProducts } from '../../actions/productActions';
+import { getProduct } from '../../actions/productActions';
 import { useDispatch, useSelector } from 'react-redux';
 import { useAlert } from 'react-alert';
 
@@ -19,7 +19,7 @@ const Home = () => {
     if (error) {
       return alert.error(error);
     }
-    dispatch(getProducts());
+    dispatch(getProduct());
   }, [dispatch, error, alert]);
   return (
     <>
