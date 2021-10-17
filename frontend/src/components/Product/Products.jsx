@@ -10,15 +10,16 @@ import { useAlert } from 'react-alert';
 import Typography from '@material-ui/core/Typography';
 import MetaData from '../layout/MetaData';
 
-// const categories = [
-//   "Laptop",
-//   "Footwear",
-//   "Bottom",
-//   "Tops",
-//   "Attire",
-//   "Camera",
-//   "SmartPhones",
-// ];
+const categories = [
+  'Laptops',
+  'Gadgets',
+  'Mobiles',
+  'Camera',
+  'Attire',
+  'Footwear',
+  'Top',
+  'Bottom',
+];
 
 const Products = ({ match }) => {
   const dispatch = useDispatch();
@@ -27,7 +28,7 @@ const Products = ({ match }) => {
 
   const [currentPage, setCurrentPage] = useState(1);
   const [price, setPrice] = useState([0, 25000]);
-  // const [category, setCategory] = useState("");
+  const [category, setCategory] = useState('');
 
   // const [ratings, setRatings] = useState(0);
 
@@ -56,8 +57,8 @@ const Products = ({ match }) => {
       dispatch(clearErrors());
     }
 
-    dispatch(getProduct(keyword, currentPage, price));
-  }, [dispatch, keyword, currentPage, price, alert, error]);
+    dispatch(getProduct(keyword, currentPage, price, category));
+  }, [dispatch, keyword, currentPage, price, alert, error, category]);
 
   return (
     <>
@@ -86,18 +87,18 @@ const Products = ({ match }) => {
               max={25000}
             />
 
-            {/* <Typography>Categories</Typography>
-            <ul className="categoryBox">
+            <Typography>Categories</Typography>
+            <ul className='categoryBox'>
               {categories.map((category) => (
                 <li
-                  className="category-link"
+                  className='category-link'
                   key={category}
                   onClick={() => setCategory(category)}
                 >
                   {category}
                 </li>
               ))}
-            </ul> */}
+            </ul>
 
             {/* <fieldset>
               <Typography component="legend">Ratings Above</Typography>
