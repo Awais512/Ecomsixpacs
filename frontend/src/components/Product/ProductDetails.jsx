@@ -7,6 +7,7 @@ import { Rating } from '@material-ui/lab';
 import ReviewCard from './ReviewCard';
 import Loader from '../layout/Loader/Loader';
 import { useAlert } from 'react-alert';
+import MetaData from '../layout/MetaData';
 
 const ProductDetails = ({ match }) => {
   const alert = useAlert();
@@ -37,6 +38,7 @@ const ProductDetails = ({ match }) => {
         <Loader />
       ) : (
         <>
+          <MetaData title={`${product.name}`} />
           <div className='ProductDetails'>
             <div>
               <Carousel>

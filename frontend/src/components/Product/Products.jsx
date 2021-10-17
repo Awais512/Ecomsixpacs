@@ -29,8 +29,7 @@ const Products = ({ match }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [price, setPrice] = useState([0, 25000]);
   const [category, setCategory] = useState('');
-
-  // const [ratings, setRatings] = useState(0);
+  const [ratings, setRatings] = useState(0);
 
   const {
     products,
@@ -57,8 +56,8 @@ const Products = ({ match }) => {
       dispatch(clearErrors());
     }
 
-    dispatch(getProduct(keyword, currentPage, price, category));
-  }, [dispatch, keyword, currentPage, price, alert, error, category]);
+    dispatch(getProduct(keyword, currentPage, price, category, ratings));
+  }, [dispatch, keyword, currentPage, price, alert, error, category, ratings]);
 
   return (
     <>
@@ -66,7 +65,7 @@ const Products = ({ match }) => {
         <Loader />
       ) : (
         <>
-          <MetaData title='PRODUCTS -- ECOMMERCE' />
+          <MetaData title='PRODUCTS' />
           <h2 className='productsHeading'>Products</h2>
 
           <div className='products'>
@@ -100,19 +99,19 @@ const Products = ({ match }) => {
               ))}
             </ul>
 
-            {/* <fieldset>
-              <Typography component="legend">Ratings Above</Typography>
+            <fieldset>
+              <Typography component='legend'>Ratings Above</Typography>
               <Slider
                 value={ratings}
                 onChange={(e, newRating) => {
                   setRatings(newRating);
                 }}
-                aria-labelledby="continuous-slider"
-                valueLabelDisplay="auto"
+                aria-labelledby='continuous-slider'
+                valueLabelDisplay='auto'
                 min={0}
                 max={5}
               />
-            </fieldset> */}
+            </fieldset>
           </div>
           {resultPerPage < count && (
             <div className='paginationBox'>
