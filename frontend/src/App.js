@@ -7,6 +7,7 @@ import { Route } from 'react-router-dom';
 import ProductDetails from './components/Product/ProductDetails';
 import Products from './components/Product/Products';
 import Search from './components/Product/Search';
+import LoginSignup from './components/User/LoginSignup';
 
 function App() {
   useEffect(() => {
@@ -24,6 +25,7 @@ function App() {
       <Route exact path='/products/:id' component={ProductDetails} />
       <Route exact path='/products' component={Products} />
       <Route path='/product/:keyword' component={Products} />
+      <Route path='/login' component={LoginSignup} />
 
       <Route exact path='/search' component={Search} />
 
