@@ -12,7 +12,6 @@ import {
 export const getProduct =
   (keyword = '', currentPage = 1, price = [0, 25000], category, ratings = 0) =>
   async (dispatch) => {
-    console.log(price);
     try {
       dispatch({
         type: ALL_PRODUCT_REQUEST,
