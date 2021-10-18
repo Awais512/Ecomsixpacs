@@ -51,14 +51,18 @@ const UserOptions = ({ user }) => {
 
   return (
     <>
+      <Backdrop open={open} style={{ zIndex: '10' }} />
       <SpeedDial
+        className='speedDial'
         ariaLabel='SpeedDial'
         onClose={() => setOpen(false)}
         onOpen={() => setOpen(true)}
         open={open}
+        style={{ zIndex: '11' }}
         direction='down'
         icon={
           <img
+            className='speedDialIcon'
             src={user.avatar.url ? user.avatar.url : '/Profile.png'}
             alt={'profile'}
           />
