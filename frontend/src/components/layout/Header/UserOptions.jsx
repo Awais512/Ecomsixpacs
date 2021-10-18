@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Profile from '../../../images/Profile.png';
 import './Header.css';
 import { SpeedDial, SpeedDialAction } from '@material-ui/lab';
 import { Backdrop } from '@material-ui/core';
@@ -63,8 +64,8 @@ const UserOptions = ({ user }) => {
         icon={
           <img
             className='speedDialIcon'
-            src={user.avatar.url ? user.avatar.url : '/Profile.png'}
-            alt={'profile'}
+            src={user.avatar.url ? user.avatar.url : Profile}
+            alt=''
           />
         }
       >
