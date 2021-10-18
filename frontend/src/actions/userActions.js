@@ -34,11 +34,11 @@ export const login = (email, password) => async (dispatch) => {
   }
 };
 
+// Register
 export const register = (userData) => async (dispatch) => {
   try {
-    dispatch({
-      type: REGISTER_REQUEST,
-    });
+    dispatch({ type: REGISTER_REQUEST });
+
     const config = { headers: { 'Content-Type': 'multipart/form-data' } };
 
     const { data } = await axios.post(
@@ -47,10 +47,7 @@ export const register = (userData) => async (dispatch) => {
       config
     );
 
-    dispatch({
-      type: REGISTER_SUCCESS,
-      payload: data.user,
-    });
+    dispatch({ type: REGISTER_SUCCESS, payload: data.user });
   } catch (error) {
     dispatch({
       type: REGISTER_FAIL,
