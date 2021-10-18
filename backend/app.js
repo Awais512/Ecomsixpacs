@@ -3,6 +3,8 @@ const app = express();
 const morgan = require('morgan');
 const errorHandler = require('./middlewares/error');
 const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const fileUpload = require('express-fileupload');
 
 //Importing Route Files
 const productRoutes = require('./routes/productRoutes');
@@ -14,6 +16,8 @@ const orderRoutes = require('./routes/orderRoutes');
 app.use(express.json());
 app.use(cookieParser());
 app.use(morgan('dev'));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(fileUpload());
 
 //Importing Routes
 app.use('/api/v1/products', productRoutes);
