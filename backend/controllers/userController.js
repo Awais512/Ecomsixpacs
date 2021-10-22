@@ -32,16 +32,13 @@ const changePassword = asyncHandler(async (req, res, next) => {
 });
 
 const updateProfile = asyncHandler(async (req, res, next) => {
-  const newUserData = {
+  const newData = {
     name: req.body.name,
     email: req.body.email,
   };
-
   if (req.body.avatar !== '') {
     const user = await User.findById(req.user.id);
-
     const imageId = user.avatar.public_id;
-
     await cloudinary.v2.uploader.destroy(imageId);
 
     const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
@@ -50,21 +47,17 @@ const updateProfile = asyncHandler(async (req, res, next) => {
       crop: 'scale',
     });
 
-    newUserData.avatar = {
+    newData.avatar = {
       public_id: myCloud.public_id,
       url: myCloud.secure_url,
     };
   }
-
-  const user = await User.findByIdAndUpdate(req.user.id, newUserData, {
+  const user = await User.findByIdAndUpdate(req.user.id, newData, {
     new: true,
     runValidators: true,
-    useFindAndModify: false,
   });
 
-  res.status(200).json({
-    success: true,
-  });
+  res.status(200).json({ success: true });
 });
 
 //Get all Users By Admin

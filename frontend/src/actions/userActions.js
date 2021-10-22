@@ -89,7 +89,7 @@ export const logout = () => async (dispatch) => {
   }
 };
 
-// Update
+// Update Profile
 export const updateProfile = (userData) => async (dispatch) => {
   try {
     dispatch({ type: UPDATE_PROFILE_REQUEST });
@@ -102,7 +102,7 @@ export const updateProfile = (userData) => async (dispatch) => {
       config
     );
 
-    dispatch({ type: UPDATE_PROFILE_SUCCESS, payload: data.user });
+    dispatch({ type: UPDATE_PROFILE_SUCCESS, payload: data.success });
   } catch (error) {
     dispatch({
       type: UPDATE_PROFILE_FAIL,

@@ -97,7 +97,6 @@ export const profileReducer = (state = { user: {} }, action) => {
     case UPDATE_PROFILE_RESET:
       return {
         ...state,
-        loading: false,
         isUpdated: false,
       };
 
