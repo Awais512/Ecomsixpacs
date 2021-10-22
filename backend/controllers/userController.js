@@ -2,6 +2,7 @@ const User = require('../models/User');
 const asyncHandler = require('express-async-handler');
 const ErrorResponse = require('../utils/errorResponse');
 const sendToken = require('../utils/jwtToken');
+const cloudinary = require('cloudinary');
 
 //Get User Details
 const getUserDetails = asyncHandler(async (req, res, next) => {
@@ -31,16 +32,39 @@ const changePassword = asyncHandler(async (req, res, next) => {
 });
 
 const updateProfile = asyncHandler(async (req, res, next) => {
-  const newData = {
+  const newUserData = {
     name: req.body.name,
     email: req.body.email,
   };
-  const user = await User.findByIdAndUpdate(req.user.id, newData, {
+
+  if (req.body.avatar !== '') {
+    const user = await User.findById(req.user.id);
+
+    const imageId = user.avatar.public_id;
+
+    await cloudinary.v2.uploader.destroy(imageId);
+
+    const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
+      folder: 'avatar',
+      width: 150,
+      crop: 'scale',
+    });
+
+    newUserData.avatar = {
+      public_id: myCloud.public_id,
+      url: myCloud.secure_url,
+    };
+  }
+
+  const user = await User.findByIdAndUpdate(req.user.id, newUserData, {
     new: true,
     runValidators: true,
+    useFindAndModify: false,
   });
 
-  res.status(200).json({ success: true, user });
+  res.status(200).json({
+    success: true,
+  });
 });
 
 //Get all Users By Admin
