@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './ProductDetails.css';
 import Carousel from 'react-material-ui-carousel';
 import { useDispatch, useSelector } from 'react-redux';
@@ -16,6 +16,22 @@ const ProductDetails = ({ match }) => {
   const { product, loading, error } = useSelector(
     (state) => state.productDetails
   );
+
+  const [quantity, setQuantity] = useState(1);
+
+  const increaseQuantity = () => {
+    if (product.Stock <= quantity) {
+      return;
+    }
+    const qty = quantity + 1;
+    setQuantity(qty);
+  };
+
+  const decreaseQuantity = () => {
+    if (1 >= quantity) return;
+    const qty = quantity - 1;
+    setQuantity(qty);
+  };
 
   useEffect(() => {
     if (error) {
@@ -69,9 +85,15 @@ const ProductDetails = ({ match }) => {
                 <h1>{`$${product.price}`}</h1>
                 <div className='detailsBlock-3-1'>
                   <div className='detailsBlock-3-1-1'>
-                    <button>-</button>
-                    <input readOnly type='number' />
-                    <button>+</button>
+                    <button onClick={decreaseQuantity}>-</button>
+                    <input
+                      readOnly
+                      defaultValue={quantity}
+                      type='number'
+                      value={quantity}
+                    />
+
+                    <button onClick={increaseQuantity}>+</button>
                   </div>
                   <button>Add to Cart</button>
                 </div>
@@ -79,8 +101,12 @@ const ProductDetails = ({ match }) => {
                 <p>
                   Status:
                   <b className={product.Stock < 1 ? 'redColor' : 'greenColor'}>
-                    {product.Stock < 1 ? 'OutOfStock' : 'InStock'}
+                    {product.Stock < 1 ? 'Out Of Stock' : 'In Stock'}
                   </b>
+                </p>
+                <p onChange={(e) => setQuantity(e.target.value)}>
+                  Quantity:
+                  <b>{quantity}</b>
                 </p>
               </div>
 
